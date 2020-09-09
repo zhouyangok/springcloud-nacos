@@ -13,9 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
  * @Author zhouyang
  * @Date 2020/9/7 下午10:29.
  */
-@FeignClient("score-server")
+@FeignClient(value = "score-server")
 @RequestMapping("/score")
-public interface ScoreService {
+public interface ScoreServiceFeign {
 
     @PostMapping("/createScore")
     CommonResult createScore(@RequestBody Score score);

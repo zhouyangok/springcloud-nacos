@@ -27,3 +27,14 @@ feign:
       min-request-size: 2048   # 指定启用压缩的最小文件大小
     response:
       enabled: true   # 开启对响应的压缩
+  hystrix:
+    enabled: true
+hystrix:
+  command:
+    default:  #default全局有效，service id指定应用有效
+      execution:
+        timeout:
+          enabled: false
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000 #断路器超时时间，默认1000ms

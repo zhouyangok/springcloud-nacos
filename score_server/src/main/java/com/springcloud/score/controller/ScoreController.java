@@ -1,18 +1,14 @@
 package com.springcloud.score.controller;
 
 import com.springcloud.entities.Score;
-import com.springcloud.entities.User;
 import com.springcloud.result.CommonResult;
-import com.springcloud.score.service.ScoreService;
+import com.springcloud.score.service.impl.ScoreServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.client.RestTemplate;
-
-import javax.annotation.Resource;
 
 /**
  * @ClassName UIController
@@ -27,7 +23,7 @@ import javax.annotation.Resource;
 public class ScoreController {
 
     @Autowired
-    private ScoreService scoreService;
+    private ScoreServiceImpl scoreService;
 
     @ApiOperation("新建用户积分")
     @PostMapping("/createScore")

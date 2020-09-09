@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestBody;
  */
 @Component
 @FeignClient(value = "user-security") //目标微服务的名称
-public interface UserFeignService {
+public interface ScoreFeignService {
 
     //Feign接口中的方法要与目标服务中的Controller中的方法完全一致
     @PostMapping("/user/createUser")
