@@ -1,0 +1,19 @@
+# nacos配置
+server:
+  port: 8088
+
+
+# ${spring.application.name}-${spring.profile.active}.${spring.cloud.nacos.config.file-extension}
+# nacos-config-client-dev.yaml
+feign:
+  hystrix:
+    enabled: true
+hystrix:
+  command:
+    default:  #default全局有效，service id指定应用有效
+      execution:
+        timeout:
+          enabled: false
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000 #断路器超时时间，默认1000ms
