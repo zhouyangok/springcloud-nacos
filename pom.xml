@@ -15,14 +15,14 @@
         <!--        公共组件-->
         <module>cloud-api-commons</module>
         <!--        积分服务-->
-        <module>score_server</module>
+        <module>score-server</module>
         <!--        库存服务-->
-        <module>stock_server</module>
+        <module>stock-server</module>
         <!--        网关服务-->
         <module>cloud-gateway</module>
         <!--        订单服务-->
-        <module>order_server</module>
-        <!--        第三方查询服务-->
+        <module>order-server</module>
+<!--                第三方查询服务-->
         <module>cloud-elasticsearch</module>
     </modules>
     <packaging>pom</packaging>
