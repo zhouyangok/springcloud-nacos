@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.order.mapper.OrderMapper;
 import com.order.service.OrderService;
 import com.order.service.ScoreServiceFeign;
+import com.order.service.StockServiceFeign;
 import com.springcloud.entities.Order;
 import com.springcloud.entities.Score;
 import com.springcloud.result.CommonResult;
@@ -25,6 +26,8 @@ public class OrderServiceImpl implements OrderService {
     private OrderMapper orderMapper;
     @Resource
     private ScoreServiceFeign scoreService;
+    @Resource
+    private StockServiceFeign stockServiceFeign;
 
     @Override
     public CommonResult createOrder(Order order) {
@@ -39,6 +42,8 @@ public class OrderServiceImpl implements OrderService {
         //2、创建订单
         order.setCreateDate(DateUtil.date());
         orderMapper.insert(order);
+        //3、消减库存
+        stockServiceFeign.delStock(1);
         return CommonResult.success();
     }
 
