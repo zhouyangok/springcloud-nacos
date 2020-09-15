@@ -15,12 +15,12 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @Date 2020/9/14 下午10:01.
  */
 
-@FeignClient(value = "stock-server",fallback = StockFallbackFeign.class)
+@FeignClient(value = "stock-server",path="/stock",fallback = StockFallbackFeign.class)
 public interface StockServiceFeign {
 
-    @PostMapping("/stock/insertStock")
+    @PostMapping("/insertStock")
     CommonResult insertStock(@RequestBody Stock stock);
 
-    @GetMapping("/stock/delStock/")
-    CommonResult delStock(Integer id);
+    @GetMapping("/delStock")
+    CommonResult delStock(@RequestParam(name="id") Integer id);
 }
