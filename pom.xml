@@ -27,6 +27,8 @@
         <module>auth-server</module>
         <!--        mq消息中间件服务-->
         <module>mq-server</module>
+        <!--        邮件短信服务-->
+        <module>email-sms-server</module>
     </modules>
     <packaging>pom</packaging>
 

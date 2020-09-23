@@ -9,7 +9,7 @@ import org.springframework.context.annotation.Configuration;
 
 /**
  * @ClassName DirectRabbitConfig
- * @Description: TODO
+ * @Description: direct exchange(直连型交换机)
  * @Author zhouyang
  * @Date 2020/9/22 下午10:07.
  */

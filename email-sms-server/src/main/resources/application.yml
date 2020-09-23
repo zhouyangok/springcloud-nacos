@@ -1,0 +1,26 @@
+server:
+  port: 8026
+spring:
+  #给项目来个名字
+  application:
+    name: email-sms-server
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848 #配置Nacos地址
+    sleuth:
+      sampler:
+        probability: 1
+  redis:
+    host: localhost
+    client-name: root
+    timeout: 1000
+    password:
+  #配置rabbitMq 服务器
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: admin
+    password: 123321
+    #虚拟host 可以不设置,使用server默认host
+#    virtual-host: JCcccHost

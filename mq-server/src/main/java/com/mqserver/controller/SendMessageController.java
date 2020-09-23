@@ -1,7 +1,9 @@
 package com.mqserver.controller;
 
+import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.lang.UUID;
 import com.springcloud.result.CommonResult;
+import com.springcloud.utils.DateUtils;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +16,7 @@ import java.util.Map;
 
 /**
  * @ClassName SendMessageController
- * @Description: TODO
+ * @Description: direct exchange(直连型交换机)
  * @Author zhouyang
  * @Date 2020/9/22 下午10:08.
  */
@@ -26,8 +28,25 @@ public class SendMessageController {
 
     @GetMapping("/sendDirectMessage")
     public CommonResult sendDirectMessage() {
+        for(int i =0;i<10;i++){
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(100);
+                        testMq();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }).start();
+        }
+        return CommonResult.success();
+    }
+
+    private void testMq(){
         String messageId = String.valueOf(UUID.randomUUID());
-        String messageData = "test message, hello!";
+        String messageData =Thread.currentThread().getName() +"-----" + DateUtils.getNow() + " test message, hello!";
         String createTime = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
         Map<String, Object> map = new HashMap<>();
         map.put("messageId", messageId);
@@ -35,6 +54,5 @@ public class SendMessageController {
         map.put("createTime", createTime);
         //将消息携带绑定键值：TestDirectRouting 发送到交换机TestDirectExchange
         rabbitTemplate.convertAndSend("TestDirectExchange", "TestDirectRouting", map);
-        return CommonResult.success();
     }
 }
