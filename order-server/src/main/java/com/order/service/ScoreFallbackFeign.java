@@ -1,8 +1,7 @@
 package com.order.service;
 
 
-import com.order.service.ScoreServiceFeign;
-import com.springcloud.entities.Score;
+import com.springcloud.entity.Score;
 import com.springcloud.result.CommonResult;
 import org.springframework.stereotype.Component;
 

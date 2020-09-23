@@ -1,7 +1,7 @@
 package com.springcloud.score.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.springcloud.entities.Score;
+import com.springcloud.entity.Score;
 
 /**
  * @ClassName ScoreMapper

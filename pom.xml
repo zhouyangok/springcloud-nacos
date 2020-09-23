@@ -8,8 +8,8 @@
     <artifactId>cloud2020</artifactId>
     <version>1.0-SNAPSHOT</version>
     <modules>
-<!--        服务注册，已使用nacos替代-->
-<!--        <module>cloud-eureka</module>-->
+        <!--        服务注册，已使用nacos替代-->
+        <!--        <module>cloud-eureka</module>-->
         <!--        用户服务-->
         <module>user-security</module>
         <!--        公共组件-->
@@ -22,8 +22,11 @@
         <module>cloud-gateway</module>
         <!--        订单服务-->
         <module>order-server</module>
-<!--                第三方查询服务-->
+        <!--                第三方查询服务-->
         <module>cloud-elasticsearch</module>
+        <module>auth-server</module>
+        <!--        mq消息中间件服务-->
+        <module>mq-server</module>
     </modules>
     <packaging>pom</packaging>
 
@@ -51,7 +54,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!-- springcloud cloud Hoxton.SR1 -->
+            <!-- com.springcloud cloud Hoxton.SR1 -->
             <dependency>
                 <groupId>org.springframework.cloud</groupId>
                 <artifactId>spring-cloud-dependencies</artifactId>
@@ -59,7 +62,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-            <!-- springcloud cloud alibaba 2.1.0.RELEASE -->
+            <!-- com.springcloud cloud alibaba 2.1.0.RELEASE -->
             <dependency>
                 <groupId>com.alibaba.cloud</groupId>
                 <artifactId>spring-cloud-alibaba-dependencies</artifactId>

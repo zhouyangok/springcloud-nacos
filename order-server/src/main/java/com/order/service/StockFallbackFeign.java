@@ -1,6 +1,6 @@
 package com.order.service;
 
-import com.springcloud.entities.Stock;
+import com.springcloud.entity.Stock;
 import com.springcloud.result.CommonResult;
 import org.springframework.stereotype.Component;
 

@@ -2,14 +2,12 @@ package com.order.controller;
 
 import com.order.service.OrderService;
 import com.order.service.ScoreServiceFeign;
-import com.springcloud.entities.Order;
-import com.springcloud.entities.Score;
+import com.springcloud.entity.Order;
 import com.springcloud.result.CommonResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
@@ -26,7 +24,8 @@ import javax.annotation.Resource;
 @RequestMapping("/order")
 @Api(tags = "订单服务接口")
 public class OrderController {
-    @Autowired
+
+    @Resource
     private OrderService orderService;
     @Resource
     private ScoreServiceFeign scoreService;

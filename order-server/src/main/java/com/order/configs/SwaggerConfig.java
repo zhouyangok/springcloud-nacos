@@ -37,7 +37,7 @@ public class SwaggerConfig {
                 .title("订单服务") //设置文档的标题
                 .description("订单服务") // 设置文档的描述
                 .version(version) // 设置文档的版本信息-> 1.0.0 Version information
-                .termsOfServiceUrl("http://www.baidu.com") // 设置文档的License信息->1.3 License information
+                .termsOfServiceUrl("https://github.com/zhouyangok") // 设置文档的License信息->1.3 License information
                 .build();
     }
 }

@@ -1,6 +1,6 @@
 package com.springcloud.score.service;
 
-import com.springcloud.entities.Score;
+import com.springcloud.entity.Score;
 import com.springcloud.result.CommonResult;
 
 /**

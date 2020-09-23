@@ -1,7 +1,7 @@
 package com.springcloud.stock.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.springcloud.entities.Stock;
+import com.springcloud.entity.Stock;
 
 /**
  * @ClassName StockMapper

@@ -1,6 +1,6 @@
 package com.order.service;
 
-import com.springcloud.entities.Order;
+import com.springcloud.entity.Order;
 import com.springcloud.result.CommonResult;
 
 /**

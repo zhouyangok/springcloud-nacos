@@ -15,7 +15,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableFeignClients
-@MapperScan("com.springcloud.score.mapper")
+@MapperScan("com.com.springcloud.score.mapper")
 public class ScoreServerApplication {
 
     public static void main(String[] args) {

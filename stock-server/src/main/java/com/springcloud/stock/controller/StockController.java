@@ -1,6 +1,6 @@
 package com.springcloud.stock.controller;
 
-import com.springcloud.entities.Stock;
+import com.springcloud.entity.Stock;
 import com.springcloud.result.CommonResult;
 import com.springcloud.stock.service.StockService;
 import io.swagger.annotations.Api;

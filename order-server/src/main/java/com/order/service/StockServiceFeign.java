@@ -1,12 +1,9 @@
 package com.order.service;
 
-import com.springcloud.entities.Stock;
+import com.springcloud.entity.Stock;
 import com.springcloud.result.CommonResult;
 import org.springframework.cloud.openfeign.FeignClient;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @ClassName stockServiceFeign
@@ -15,12 +12,12 @@ import org.springframework.web.bind.annotation.RequestBody;
  * @Date 2020/9/14 下午10:01.
  */
 
-@FeignClient(value = "stock-server",path="/stock",fallback = StockFallbackFeign.class)
+@FeignClient(value = "stock-server", path = "/stock", fallback = StockFallbackFeign.class)
 public interface StockServiceFeign {
 
     @PostMapping("/insertStock")
     CommonResult insertStock(@RequestBody Stock stock);
 
     @GetMapping("/delStock")
-    CommonResult delStock(@RequestParam(name="id") Integer id);
+    CommonResult delStock(@RequestParam(name = "id") Integer id);
 }

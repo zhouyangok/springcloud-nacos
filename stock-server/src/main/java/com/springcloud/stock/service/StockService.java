@@ -1,6 +1,6 @@
 package com.springcloud.stock.service;
 
-import com.springcloud.entities.Stock;
+import com.springcloud.entity.Stock;
 import com.springcloud.result.CommonResult;
 
 /**

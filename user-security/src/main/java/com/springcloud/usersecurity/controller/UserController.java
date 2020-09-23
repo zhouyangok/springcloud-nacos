@@ -1,6 +1,6 @@
 package com.springcloud.usersecurity.controller;
 
-import com.springcloud.entities.User;
+import com.springcloud.entity.User;
 import com.springcloud.result.CommonResult;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;

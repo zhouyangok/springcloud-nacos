@@ -39,4 +39,4 @@ spring:
 
 mybatis:
   mapperlocations: classpath:mapper/*.xml
-  type-aliases-package: com.springcloud.entities #所有Entity别名类所在包
+  type-aliases-package: com.com.springcloud.entities #所有Entity别名类所在包

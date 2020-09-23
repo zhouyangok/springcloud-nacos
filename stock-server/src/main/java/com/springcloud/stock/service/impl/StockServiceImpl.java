@@ -2,7 +2,7 @@ package com.springcloud.stock.service.impl;
 
 import cn.hutool.core.date.DateUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.springcloud.entities.Stock;
+import com.springcloud.entity.Stock;
 import com.springcloud.result.CommonResult;
 import com.springcloud.stock.mapper.StockMapper;
 import com.springcloud.stock.service.StockService;

@@ -1,6 +1,6 @@
 package com.springcloud.score.service;
 
-import com.springcloud.entities.User;
+import com.springcloud.entity.User;
 import com.springcloud.result.CommonResult;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.stereotype.Component;

@@ -1,6 +1,6 @@
 package com.springcloud.score.controller;
 
-import com.springcloud.entities.Score;
+import com.springcloud.entity.Score;
 import com.springcloud.result.CommonResult;
 import com.springcloud.score.service.impl.ScoreServiceImpl;
 import io.swagger.annotations.Api;

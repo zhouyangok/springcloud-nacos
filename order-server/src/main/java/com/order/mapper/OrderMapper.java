@@ -1,7 +1,7 @@
 package com.order.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.springcloud.entities.Order;
+import com.springcloud.entity.Order;
 
 /**
  * @ClassName OrderMapper

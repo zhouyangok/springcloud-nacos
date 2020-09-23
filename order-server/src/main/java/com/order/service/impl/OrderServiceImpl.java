@@ -7,8 +7,8 @@ import com.order.mapper.OrderMapper;
 import com.order.service.OrderService;
 import com.order.service.ScoreServiceFeign;
 import com.order.service.StockServiceFeign;
-import com.springcloud.entities.Order;
-import com.springcloud.entities.Score;
+import com.springcloud.entity.Order;
+import com.springcloud.entity.Score;
 import com.springcloud.result.CommonResult;
 import org.springframework.stereotype.Service;
 

@@ -1,4 +1,4 @@
-package com.springcloud.entities;
+package com.springcloud.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -16,7 +17,7 @@ import java.util.Date;
  */
 @Data
 @TableName(value = "t_stock")
-public class Stock {
+public class Stock implements Serializable {
 
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;

@@ -20,7 +20,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 public class SwaggerConfig {
 
-    public static final String SWAGGER_SCAN_BASE_PACKAGE = "com.springcloud.score.controller";
+    public static final String SWAGGER_SCAN_BASE_PACKAGE = "com.com.springcloud.score.controller";
 
     private static final String version="1.0.1";
     @Bean
@@ -37,7 +37,7 @@ public class SwaggerConfig {
                 .title("积分服务") //设置文档的标题
                 .description("积分服务") // 设置文档的描述
                 .version(version) // 设置文档的版本信息-> 1.0.0 Version information
-                .termsOfServiceUrl("http://www.baidu.com") // 设置文档的License信息->1.3 License information
+                .termsOfServiceUrl("https://github.com/zhouyangok") // 设置文档的License信息->1.3 License information
                 .build();
     }
 }
