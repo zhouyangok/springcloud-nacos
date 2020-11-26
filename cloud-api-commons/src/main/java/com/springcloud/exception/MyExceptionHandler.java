@@ -1,4 +1,4 @@
-package com.springcloud.Exception;
+package com.springcloud.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

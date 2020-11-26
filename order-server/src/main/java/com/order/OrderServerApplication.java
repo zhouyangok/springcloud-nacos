@@ -18,7 +18,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
  * @Author zhouyang
  * @Date 2020/7/1 下午1:29.
  */
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages={"com.order","com.springcloud"})
 @EnableDiscoveryClient
 @EnableFeignClients("com.order.service")
 @MapperScan("com.order.mapper")

@@ -17,7 +17,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @EnableDiscoveryClient
 @EnableFeignClients
 @EnableHystrix
-@MapperScan("com.com.springcloud.stock.mapper")
+@MapperScan("com.springcloud.stock.mapper")
 public class StockServerApplication {
 
     public static void main(String[] args) {

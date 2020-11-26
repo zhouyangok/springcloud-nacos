@@ -7,7 +7,6 @@ import com.order.mapper.OrderMapper;
 import com.order.service.OrderService;
 import com.order.service.ScoreServiceFeign;
 import com.order.service.StockServiceFeign;
-import com.springcloud.Exception.MyExceptionHandler;
 import com.springcloud.entity.Order;
 import com.springcloud.entity.Score;
 import com.springcloud.result.CommonResult;
@@ -32,12 +31,6 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public CommonResult createOrder(Order order) {
-
-//        try{
-            int i = 1/0;
-//        }catch (Exception e){
-//            throw new MyExceptionHandler(1,"自定义异常");
-//        }
         //1、创建积分
         Score score = new Score();
         score.setScore(10);
@@ -56,6 +49,11 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public CommonResult getOrderById(Integer id) {
+        //        try{
+        int i = 1 / 0;
+//        }catch (Exception e){
+//            throw new MyExceptionHandler(1,"自定义异常");
+//        }
         Order order = orderMapper.selectById(id);
         return CommonResult.success(order);
     }
