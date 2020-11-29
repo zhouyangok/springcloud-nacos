@@ -29,3 +29,6 @@ build/
 *.diff
 *.patch
 *.tmp
+.gitignore
+pom.xml
+src/

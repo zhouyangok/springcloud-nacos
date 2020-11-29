@@ -1,5 +1,6 @@
 package com.springcloud.usersecurity;
 
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
@@ -14,6 +15,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableCircuitBreaker
+@MapperScan("com.springcloud.usersecurity.mapper")
 public class UserSecurityApplication {
     public static void main(String[] args) {
         SpringApplication.run(UserSecurityApplication.class,args);
