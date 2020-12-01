@@ -7,7 +7,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 /**
  * @ClassName EmailSmsApplication
- * @Description: TODO
+ * @Description: mq消费端，移动短信集成
  * @Author zhouyang
  * @Date 2020/9/23 下午9:57.
  */
