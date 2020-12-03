@@ -1,0 +1,17 @@
+spring:
+  #给项目来个名字
+  application:
+    name: email-sms-server
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:8848 #配置Nacos地址
+      config:
+        server-addr: 127.0.0.1:8848 #配置Nacos地址
+        file-extension: yaml
+
+#nacos-cloud中要求服务的配置文件名称格式为：${prefix}-${spring.profiles.active}.${file-extension}
+#  prefix 默认为 spring.application.name 的值；
+#  spring.profiles.active 即为当前环境对应的 profile
+#  file-exetension 为配置内容的数据格式
+#nacos中本服务的配置文件名称为：email-sms-server-dev.yaml

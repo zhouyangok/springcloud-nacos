@@ -12,7 +12,7 @@ spring:
       sampler:
         probability: 1
   redis:
-    host: localhost
+    host: 127.0.0.1
     client-name: root
     timeout: 1000
     password:
@@ -30,3 +30,5 @@ spring:
     url: jdbc:mysql://localhost:3306/cloud?usrUnicode=true&characterEncoding=utf-8&useSSL=false
     username: root
     password: root
+  profiles:
+    active: dev
