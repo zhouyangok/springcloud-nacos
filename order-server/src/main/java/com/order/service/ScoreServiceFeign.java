@@ -1,5 +1,6 @@
 package com.order.service;
 
+import com.order.service.impl.ScoreFallbackFeign;
 import com.springcloud.entity.Score;
 import com.springcloud.result.CommonResult;
 import org.springframework.cloud.openfeign.FeignClient;

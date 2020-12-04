@@ -1,5 +1,6 @@
-package com.order.service;
+package com.order.service.impl;
 
+import com.order.service.StockServiceFeign;
 import com.springcloud.entity.Stock;
 import com.springcloud.result.CommonResult;
 import org.springframework.stereotype.Component;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Component;
  * @Date 2020/9/14 下午10:02.
  */
 @Component
-public class StockFallbackFeign implements StockServiceFeign{
+public class StockFallbackFeign implements StockServiceFeign {
 
     @Override
     public CommonResult insertStock(Stock stock) {
