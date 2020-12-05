@@ -33,3 +33,11 @@ hystrix:
         isolation:
           thread:
             timeoutInMilliseconds: 3000 #断路器超时时间，默认1000ms
+mybatis-plus:
+  global-config:
+    db-config:
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+#mybatis日志开启
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

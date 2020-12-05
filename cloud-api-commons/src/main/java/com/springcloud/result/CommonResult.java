@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor //全参构造器
 @NoArgsConstructor //空参构造器
-public class CommonResult<T> {
+public class    CommonResult<T> {
     private Integer code;
     private String message;
     private boolean status;

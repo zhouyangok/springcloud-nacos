@@ -38,4 +38,19 @@ public class StrUtils {
         return str1;
     }
 
+    /**
+     * 将list集合转化为指定字符拼接而成的字符串
+     * eg: list[a1,a2,a3]
+     * result: a1,a2,a3
+     * @param list
+     * @return
+     */
+    public static String listToString(List<String> list){
+        if(null!=list&&list.size()>0){
+            String result = StrUtil.join(",",list);
+            return result;
+        }
+        return null;
+    }
+
 }
