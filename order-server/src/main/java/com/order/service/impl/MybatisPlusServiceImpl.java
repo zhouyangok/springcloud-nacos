@@ -1,5 +1,7 @@
 package com.order.service.impl;
 
+import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.order.entity.MyBatisPlus;
@@ -7,12 +9,10 @@ import com.order.mapper.MyBatisPlusMapper;
 import com.order.service.MybatisPlusService;
 import com.order.vo.MyBatisPlusVo;
 import com.springcloud.result.CommonResult;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import javax.annotation.Resource;
-import java.sql.Wrapper;
 
 /**
  * @ClassName MybatisPlusServiceImpl
@@ -48,9 +48,22 @@ public class MybatisPlusServiceImpl implements MybatisPlusService {
 
     @Override
     public CommonResult list(int pageSize, int pageNum, MyBatisPlusVo myBatisPlusVo) {
-
         Page<MyBatisPlus> page = new Page<>(pageNum, pageSize);
-        IPage result = myBatisPlusMapper.selectPage(page, null);
+        //构建查询条件
+        QueryWrapper<MyBatisPlus> wrapper = new QueryWrapper<>();
+        if (StrUtil.isNotBlank(myBatisPlusVo.getName())) {
+            wrapper.like("name", myBatisPlusVo.getName());
+        }
+        if (myBatisPlusVo.getAge() != null) {
+            wrapper.eq("age",myBatisPlusVo.getAge());
+        }
+        if (StrUtil.isNotBlank(myBatisPlusVo.getStart())) {
+            wrapper.ge("create_time",myBatisPlusVo.getStart());
+        }
+        if (StrUtil.isNotBlank(myBatisPlusVo.getEnd())) {
+            wrapper.le("create_time",myBatisPlusVo.getEnd());
+        }
+        IPage result = myBatisPlusMapper.selectPage(page, wrapper);
         return CommonResult.success(result);
     }
 
