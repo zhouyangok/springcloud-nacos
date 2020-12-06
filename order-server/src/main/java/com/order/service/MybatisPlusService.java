@@ -14,9 +14,9 @@ import com.springcloud.result.CommonResult;
 public interface MybatisPlusService {
     int delete(Long id);
 
-    int update(MyBatisPlus myBatisPlus);
+    int update(MyBatisPlusVo myBatisPlus);
 
-    int save(MyBatisPlus myBatisPlus);
+    int save(MyBatisPlusVo myBatisPlus);
 
     CommonResult list(int pageSize,int pageNum,MyBatisPlusVo myBatisPlusVo);
 

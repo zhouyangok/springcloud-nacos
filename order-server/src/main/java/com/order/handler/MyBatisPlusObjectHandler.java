@@ -22,6 +22,8 @@ public class MyBatisPlusObjectHandler implements MetaObjectHandler {
         log.info("start insert fill ....");
         this.setFieldValByName( "createTime", LocalDateTime.now(),metaObject);
         this.setFieldValByName( "updateTime", LocalDateTime.now(),metaObject);
+
+        this.setFieldValByName("version",1,metaObject);
     }
 
     @Override

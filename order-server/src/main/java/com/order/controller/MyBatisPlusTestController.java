@@ -57,7 +57,7 @@ public class MyBatisPlusTestController {
 
     @ApiOperation("保存实体类")
     @PostMapping("/save")
-    public CommonResult save(@RequestBody MyBatisPlus myBatisPlus) {
+    public CommonResult save(@RequestBody MyBatisPlusVo myBatisPlus) {
         int result = mybatisPlusService.save(myBatisPlus);
         if (result > 0) {
             return CommonResult.success();
@@ -67,7 +67,7 @@ public class MyBatisPlusTestController {
 
     @ApiOperation("更新实体类")
     @PostMapping("/update")
-    public CommonResult update(@RequestBody MyBatisPlus myBatisPlus){
+    public CommonResult update(@RequestBody MyBatisPlusVo myBatisPlus){
         int result = mybatisPlusService.update(myBatisPlus);
         if (result > 0) {
             return CommonResult.success();

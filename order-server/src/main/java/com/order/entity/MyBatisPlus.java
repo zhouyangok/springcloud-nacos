@@ -26,9 +26,15 @@ public class MyBatisPlus {
     private Integer delFlag;
     // 注意！这里需要标记为填充字段
     @TableField(fill = FieldFill.INSERT)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime createTime;
     @TableField(fill = FieldFill.INSERT_UPDATE)
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
     private LocalDateTime updateTime;
+    /**
+     * 乐观锁实现
+     */
+    @Version
+    @TableField(fill = FieldFill.INSERT)
+    private Integer version;
 }

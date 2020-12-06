@@ -14,6 +14,7 @@ import java.util.Date;
 @Data
 public class MyBatisPlusVo {
 
+    private Long id;
     @ApiModelProperty(value = "实体名称，模糊查询")
     private String name;
     @ApiModelProperty(value = "年龄")
@@ -21,5 +22,5 @@ public class MyBatisPlusVo {
     @ApiModelProperty(value = "创建时间，示例：2020-01-10 13：23：12")
     private String start;
     @ApiModelProperty(value = "修改时间，示例：2020-01-10 13：23：12")
-    private String  end;
+    private String end;
 }

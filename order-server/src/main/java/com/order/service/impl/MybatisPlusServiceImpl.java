@@ -1,5 +1,6 @@
 package com.order.service.impl;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
@@ -34,14 +35,21 @@ public class MybatisPlusServiceImpl implements MybatisPlusService {
 
     @Override
     @ExceptionHandler
-    public int update(MyBatisPlus myBatisPlus) {
-        int result = myBatisPlusMapper.updateById(myBatisPlus);
-        return result;
+    public int update(MyBatisPlusVo myBatisPlusVo) {
+        MyBatisPlus myBatisPlus = myBatisPlusMapper.selectById(myBatisPlusVo.getId());
+        if (null != myBatisPlus) {
+            BeanUtil.copyProperties(myBatisPlusVo, myBatisPlus);
+            int result = myBatisPlusMapper.updateById(myBatisPlus);
+            return result;
+        }
+        return 0;
     }
 
     @Override
     @ExceptionHandler
-    public int save(MyBatisPlus myBatisPlus) {
+    public int save(MyBatisPlusVo myBatisPlusVo) {
+        MyBatisPlus myBatisPlus = new MyBatisPlus();
+        BeanUtil.copyProperties(myBatisPlusVo, myBatisPlus);
         int result = myBatisPlusMapper.insert(myBatisPlus);
         return result;
     }
@@ -55,13 +63,13 @@ public class MybatisPlusServiceImpl implements MybatisPlusService {
             wrapper.like("name", myBatisPlusVo.getName());
         }
         if (myBatisPlusVo.getAge() != null) {
-            wrapper.eq("age",myBatisPlusVo.getAge());
+            wrapper.eq("age", myBatisPlusVo.getAge());
         }
         if (StrUtil.isNotBlank(myBatisPlusVo.getStart())) {
-            wrapper.ge("create_time",myBatisPlusVo.getStart());
+            wrapper.ge("create_time", myBatisPlusVo.getStart());
         }
         if (StrUtil.isNotBlank(myBatisPlusVo.getEnd())) {
-            wrapper.le("create_time",myBatisPlusVo.getEnd());
+            wrapper.le("create_time", myBatisPlusVo.getEnd());
         }
         IPage result = myBatisPlusMapper.selectPage(page, wrapper);
         return CommonResult.success(result);
