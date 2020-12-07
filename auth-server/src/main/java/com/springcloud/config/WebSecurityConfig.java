@@ -27,8 +27,8 @@ import javax.annotation.Resource;
  */
 
 @Configuration
-@EnableWebSecurity
-//@EnableGlobalMethodSecurity(prePostEnabled = true)
+@EnableWebSecurity // 这个注解必须加，开启Security
+//@EnableGlobalMethodSecurity(prePostEnabled = true) //保证post之前的注解可以使用
 @EnableGlobalMethodSecurity(securedEnabled = true)
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     /**
