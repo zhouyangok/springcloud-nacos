@@ -9,7 +9,7 @@ import lombok.Data;
  * @Date 2020/9/16 下午10:30.
  */
 @Data
-public class User {
+public class JwtUser {
 
     String username;
     String password;

@@ -55,14 +55,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Resource
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    /*@Autowired
-    private CustomAccessDeniedHandler customAccessDeniedHandler;
-
-    @Autowired
-    private CustomLogoutSuccessHandler customLogoutSuccessHandler;
-
-    @Autowired
-    private CustomAuthenticationSuccessHandler customAuthenticationSuccessHandler;*/
 
     // 设置 HTTP 验证规则
     @Override

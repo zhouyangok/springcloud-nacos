@@ -3,6 +3,7 @@ package com.email_sms.controller;
 import com.email_sms.service.ISendSmsService;
 import com.springcloud.result.CommonResult;
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -27,9 +28,11 @@ public class SendSmsController {
     @Autowired(required = false)
     ISendSmsService sendSmsService;
 
+    @ApiParam("阿里云发送短信服务")
     @GetMapping("/sendSms")
-    public Map<String, Object> sendSms(String phone) {
-        return sendSmsService.sendSms(phone);
+    public CommonResult sendSms(String phone) {
+        Map<String, Object> map = sendSmsService.sendSms(phone);
+        return CommonResult.success(map);
     }
 
 

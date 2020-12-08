@@ -5,3 +5,7 @@
 将order-server中配置放在nacos的配置文件中；  
 添加mybatisPlus条件查询；  
 添加配置文件，打印mybatis的sql日志
+
+链路追踪：Spring Cloud Zipkin
+
+接口重复点击

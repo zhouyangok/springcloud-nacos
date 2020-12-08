@@ -1,10 +1,10 @@
 package com.springcloud.filter;
 
+import com.alibaba.fastjson.JSON;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.springcloud.constant.ConstantKey;
-import com.springcloud.entity.User;
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
+import com.springcloud.entity.JwtUser;
+import com.springcloud.result.CommonResult;
+import com.springcloud.utils.JwtUtil;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -36,22 +36,7 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
 
     public JWTLoginFilter(AuthenticationManager authenticationManager) {
         this.authenticationManager = authenticationManager;
-    }
-
-    // 尝试身份认证(接收并解析用户凭证)
-    @Override
-    public Authentication attemptAuthentication(HttpServletRequest req, HttpServletResponse res) throws AuthenticationException {
-        try {
-            User user = new ObjectMapper().readValue(req.getInputStream(), User.class);
-            return authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(
-                            user.getUsername(),
-                            user.getPassword(),
-                            new ArrayList<>())
-            );
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        super.setFilterProcessesUrl("/auth/login");
     }
 
     // 认证成功(用户成功登录后，这个方法会被调用，我们在这个方法里生成token)
@@ -60,36 +45,56 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
                                             HttpServletResponse response,
                                             FilterChain chain,
                                             Authentication auth) throws IOException, ServletException {
-        // builder the token
-        String token = null;
+
         try {
+//            Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
+//            // 定义存放角色集合的对象
+//            List roleList = new ArrayList<>();
+//            for (GrantedAuthority grantedAuthority : authorities) {
+//                roleList.add(grantedAuthority.getAuthority());
+//            }
+            // 登录成功后，返回token到header里面
+//            response.addHeader("Authorization", "Bearer " + token);
+
+            // 查看源代码会发现调用getPrincipal()方法会返回一个实现了`UserDetails`接口的对象
+            // 所以就是JwtUser啦
+            JwtUser jwtUser = (JwtUser) auth.getPrincipal();
+            logger.info("jwtUser:" + jwtUser.toString());
+            boolean isRemember = true;
+
+            String role = "";
+            // 因为在JwtUser中存了权限信息，可以直接获取，由于只有一个角色就这么干了
             Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
             // 定义存放角色集合的对象
             List roleList = new ArrayList<>();
             for (GrantedAuthority grantedAuthority : authorities) {
                 roleList.add(grantedAuthority.getAuthority());
             }
-
-            // 生成token start
-            Calendar calendar = Calendar.getInstance();
-            Date now = calendar.getTime();
-            // 设置签发时间
-            calendar.setTime(new Date());
-            // 设置过期时间
-            calendar.add(Calendar.MINUTE, 5);// 5分钟
-            Date time = calendar.getTime();
-            token = Jwts.builder()
-                    .setSubject(auth.getName() + "-" + roleList)
-                    .setIssuedAt(now)//签发时间
-                    .setExpiration(time)//过期时间
-                    .signWith(SignatureAlgorithm.HS512, ConstantKey.SIGNING_KEY) //采用什么算法是可以自己选择的，不一定非要采用HS512
-                    .compact();
-            // 生成token end
-
-            // 登录成功后，返回token到header里面
-            response.addHeader("Authorization", "Bearer " + token);
+            //还应该加入权限信息
+            String token = JwtUtil.createToken(jwtUser.getUsername(),roleList, isRemember);
+            // 返回创建成功的token
+            // 但是这里创建的token只是单纯的token
+            // 按照jwt的规定，最后请求的格式应该是 `Bearer token`
+//        response.setHeader("token", JwtTokenUtils.TOKEN_PREFIX + token);
+            response.getWriter().write(JSON.toJSONString(CommonResult.success(token)));
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    // 尝试身份认证(接收并解析用户凭证)
+    @Override
+    public Authentication attemptAuthentication(HttpServletRequest req, HttpServletResponse res) throws AuthenticationException {
+        try {
+            JwtUser user = new ObjectMapper().readValue(req.getInputStream(), JwtUser.class);
+            return authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(
+                            user.getUsername(),
+                            user.getPassword(),
+                            new ArrayList<>())
+            );
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 }

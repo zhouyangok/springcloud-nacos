@@ -59,7 +59,6 @@
             <artifactId>aliyun-java-sdk-core</artifactId>
             <version>${aliyun-java-sdk-core.version}</version>
         </dependency>
-
         <dependency>
             <groupId>com.aliyun</groupId>
             <artifactId>aliyun-java-sdk-dysmsapi</artifactId>
