@@ -47,15 +47,6 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
                                             Authentication auth) throws IOException, ServletException {
 
         try {
-//            Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
-//            // 定义存放角色集合的对象
-//            List roleList = new ArrayList<>();
-//            for (GrantedAuthority grantedAuthority : authorities) {
-//                roleList.add(grantedAuthority.getAuthority());
-//            }
-            // 登录成功后，返回token到header里面
-//            response.addHeader("Authorization", "Bearer " + token);
-
             // 查看源代码会发现调用getPrincipal()方法会返回一个实现了`UserDetails`接口的对象
             // 所以就是JwtUser啦
             JwtUser jwtUser = (JwtUser) auth.getPrincipal();
@@ -71,7 +62,7 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
                 roleList.add(grantedAuthority.getAuthority());
             }
             //还应该加入权限信息
-            String token = JwtUtil.createToken(jwtUser.getUsername(),roleList, isRemember);
+            String token = JwtUtil.createToken(jwtUser.getUsername(),null, isRemember);
             // 返回创建成功的token
             // 但是这里创建的token只是单纯的token
             // 按照jwt的规定，最后请求的格式应该是 `Bearer token`
