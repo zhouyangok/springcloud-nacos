@@ -1,5 +1,7 @@
 package com.springcloud.controller;
 
+import com.springcloud.result.CommonResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -13,5 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/login")
 public class TestLoginController {
 
+    @GetMapping("/test")
+    public CommonResult test(){
+        return CommonResult.success();
+    }
 
 }

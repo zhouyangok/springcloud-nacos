@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.stereotype.Component;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -49,8 +50,7 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
         try {
             // 查看源代码会发现调用getPrincipal()方法会返回一个实现了`UserDetails`接口的对象
             // 所以就是JwtUser啦
-            JwtUser jwtUser = (JwtUser) auth.getPrincipal();
-            logger.info("jwtUser:" + jwtUser.toString());
+            logger.info("auth:" + auth);
             boolean isRemember = true;
 
             String role = "";
@@ -62,11 +62,12 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
                 roleList.add(grantedAuthority.getAuthority());
             }
             //还应该加入权限信息
-            String token = JwtUtil.createToken(jwtUser.getUsername(),null, isRemember);
+            String token = JwtUtil.createToken(auth.getName(),null, isRemember);
             // 返回创建成功的token
             // 但是这里创建的token只是单纯的token
             // 按照jwt的规定，最后请求的格式应该是 `Bearer token`
 //        response.setHeader("token", JwtTokenUtils.TOKEN_PREFIX + token);
+            response.setHeader("Content-type", "application/json;charset=UTF-8");
             response.getWriter().write(JSON.toJSONString(CommonResult.success(token)));
         } catch (Exception e) {
             e.printStackTrace();

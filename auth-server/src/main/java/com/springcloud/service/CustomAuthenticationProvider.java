@@ -15,7 +15,7 @@ import java.util.ArrayList;
 
 /**
  * @ClassName CustomAuthenticationProvider
- * @Description: TODO
+ * @Description: 登录权限认证
  * @Author zhouyang
  * @Date 2020/9/16 下午10:41.
  */
