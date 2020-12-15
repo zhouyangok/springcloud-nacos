@@ -29,3 +29,5 @@
 ## TODO-list
 - 链路追踪：Spring Cloud Zipkin
 - AOP解决接口重复点击
+- netty实现网络调用
+- druid数据库连接池集成
