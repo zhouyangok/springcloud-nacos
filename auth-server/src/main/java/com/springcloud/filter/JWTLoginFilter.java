@@ -53,7 +53,6 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
             logger.info("auth:" + auth);
             boolean isRemember = true;
 
-            String role = "";
             // 因为在JwtUser中存了权限信息，可以直接获取，由于只有一个角色就这么干了
             Collection<? extends GrantedAuthority> authorities = auth.getAuthorities();
             // 定义存放角色集合的对象
@@ -62,7 +61,7 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
                 roleList.add(grantedAuthority.getAuthority());
             }
             //还应该加入权限信息
-            String token = JwtUtil.createToken(auth.getName(),null, isRemember);
+            String token = JwtUtil.createToken(auth.getName(),roleList, isRemember);
             // 返回创建成功的token
             // 但是这里创建的token只是单纯的token
             // 按照jwt的规定，最后请求的格式应该是 `Bearer token`

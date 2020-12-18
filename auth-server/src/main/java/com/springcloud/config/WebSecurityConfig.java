@@ -38,6 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             // -- register url
             "/users/signup",
             "/users/addTask",
+            "/login/test",
             // -- swagger ui
             "/v2/api-docs",
             "/swagger-resources",

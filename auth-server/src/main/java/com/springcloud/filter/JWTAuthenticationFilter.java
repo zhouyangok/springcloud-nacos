@@ -5,6 +5,7 @@ import com.springcloud.exception.TokenException;
 import com.springcloud.service.GrantedAuthorityImpl;
 import com.springcloud.service.UserServiceImpl;
 import com.springcloud.utils.JwtUtil;
+import com.springcloud.utils.StrUtils;
 import io.jsonwebtoken.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,21 +26,20 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @ClassName JWTAuthenticationFilter
  * @Description: 自定义JWT认证过滤器
- *  该类继承自BasicAuthenticationFilter，在doFilterInternal方法中，
- *  从http头的Authorization 项读取token数据，然后用Jwts包提供的方法校验token的合法性。
- *  如果校验通过，就认为这是一个取得授权的合法请求
+ * 该类继承自BasicAuthenticationFilter，在doFilterInternal方法中，
+ * 从http头的Authorization 项读取token数据，然后用Jwts包提供的方法校验token的合法性。
+ * 如果校验通过，就认为这是一个取得授权的合法请求
  * @Author zhouyang
  * @Date 2020/9/16 下午10:26.
  */
 
 public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
 
-    @Autowired
-    private UserServiceImpl userService;
     private static final Logger logger = LoggerFactory.getLogger(JWTAuthenticationFilter.class);
 
     public JWTAuthenticationFilter(AuthenticationManager authenticationManager) {
@@ -53,24 +53,21 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
 
         if (authHeader != null && authHeader.startsWith("Bearer ")) {
             String authToken = authHeader.substring("Bearer ".length());
+            List<String> roles = new ArrayList<>();
+            Claims claims = JwtUtil.parseToken(authToken);
 
-            String username = JwtUtil.parseToken(authToken, "_secret");
-
-            if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-
-                UserDetails userDetails = userService.loadUserByUsername(username);
-                if (userDetails != null) {
+            if (claims != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+               roles= (List) claims.get("rol");
+                if (claims.getSubject() != null) {
                     UsernamePasswordAuthenticationToken authentication =
-                            new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+                            new UsernamePasswordAuthenticationToken(claims.getSubject(), null, JwtUtil.authorities( StrUtils.listToString(roles)));
                     authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                 }
             }
         }
-
         filterChain.doFilter(request, response);
     }
-
 
 
 //    @Override

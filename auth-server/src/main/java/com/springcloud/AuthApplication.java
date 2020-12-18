@@ -13,9 +13,9 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
  */
 @SpringBootApplication(exclude = DataSourceAutoConfiguration.class)
 @EnableDiscoveryClient
-public class JWTApplication {
+public class AuthApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(JWTApplication.class, args);
+        SpringApplication.run(AuthApplication.class, args);
     }
 }
