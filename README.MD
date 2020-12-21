@@ -24,10 +24,13 @@
 将order-server中配置放在nacos的配置文件中；  
 添加mybatisPlus条件查询；  
 添加配置文件，打印mybatis的sql日志
-
+2020-12-14 添加spring-security,jwt登录权限校验
+2020-12-19 添加springcloud gateway网关
+2020-12-21 gateway项目启动时，因为依赖和springboot-start-web冲突导致失败，需要exclude掉web依赖。
 
 ## TODO-list
 - 链路追踪：Spring Cloud Zipkin
 - AOP解决接口重复点击
 - netty实现网络调用
 - druid数据库连接池集成
+- alibaba事务添加
