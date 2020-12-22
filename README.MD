@@ -34,3 +34,4 @@
 - netty实现网络调用
 - druid数据库连接池集成
 - alibaba事务添加
+- jenkins自动部署
