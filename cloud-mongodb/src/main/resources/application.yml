@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: mongoDb-test
+  data:
+    mongodb:
+      database: articledb
+      host: 127.0.0.1
+      password:
+      username:
+      port: 27017
+server:
+  port: 8870
