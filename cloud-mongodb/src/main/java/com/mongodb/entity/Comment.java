@@ -17,7 +17,7 @@ import java.util.Date;
  * @Date 2020/12/30 下午5:59.
  */
 @Data
-@Document(collation = "comment")
+@Document("comment")
 public class Comment implements Serializable {
     @Id
     private String id;
