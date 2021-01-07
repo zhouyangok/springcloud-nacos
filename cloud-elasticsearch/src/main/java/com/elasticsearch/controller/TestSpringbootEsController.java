@@ -62,9 +62,16 @@ public class TestSpringbootEsController {
     public CommonResult creatIndex(String idxName) {
         CommonResult response = new CommonResult();
         try {
-            CreateIndexRequest request = new CreateIndexRequest(idxName);
-            CreateIndexResponse response1 = restHighLevelClient.indices().create(request, RequestOptions.DEFAULT);
-            System.out.println(response1);
+            if(!baseElasticService.indexExist(idxName)){
+                CreateIndexRequest request = new CreateIndexRequest(idxName);
+                CreateIndexResponse response1 = restHighLevelClient.indices().create(request, RequestOptions.DEFAULT);
+                System.out.println(response1);
+            }else {
+                response.setStatus(false);
+                response.setCode(400);
+                response.setMessage("索引已经存在，不允许创建");
+            }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -72,17 +79,19 @@ public class TestSpringbootEsController {
     }
 
     @GetMapping("/indexExist")
-    public boolean indexExist(String idxName) throws Exception {
+    public boolean indexExist(@RequestParam String idxName) throws Exception {
         GetIndexRequest request = new GetIndexRequest(idxName);
-//        request.local(false);
-//        request.humanReadable(true);
-//        request.includeDefaults(false);
-//        request.indicesOptions(IndicesOptions.lenientExpandOpen());
         return restHighLevelClient.indices().exists(request, RequestOptions.DEFAULT);
     }
 
+    /**
+     * 删除索引
+     * @param idxName
+     * @return
+     * @throws Exception
+     */
     @GetMapping("/delete")
-    public boolean delete(String idxName) throws Exception {
+    public boolean delete(@RequestParam String idxName) throws Exception {
         DeleteIndexRequest request = new DeleteIndexRequest(idxName);
         AcknowledgedResponse acknowledgedResponse = restHighLevelClient.indices().delete(request, RequestOptions.DEFAULT);
         return acknowledgedResponse.isAcknowledged();

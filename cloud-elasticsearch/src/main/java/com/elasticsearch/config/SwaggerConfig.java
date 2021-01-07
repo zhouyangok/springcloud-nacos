@@ -19,7 +19,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
-    public static final String SWAGGER_SCAN_BASE_PACKAGE = "com.cloud.elasticsearch.controller";
+    public static final String SWAGGER_SCAN_BASE_PACKAGE = "com.elasticsearch.controller";
 
     private static final String version="1.0.1";
     @Bean
