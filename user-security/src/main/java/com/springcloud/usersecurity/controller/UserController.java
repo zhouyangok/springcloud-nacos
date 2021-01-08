@@ -24,14 +24,14 @@ public class UserController {
 
     @PostMapping("/createUser")
     public CommonResult createUser(@RequestBody User user) {
-        log.info("id:{},name:{}", user.getId(), user.getName());
+        log.info("id:{},name:{}", user.getId(), user.getUsername());
         return CommonResult.success();
     }
 
     @GetMapping("/getById/{id}")
     public CommonResult getUserById(@PathVariable Long id) {
         log.info("id:{}", id);
-        User user = new User(1L, "admin");
+        User user = new User(1L, "admin","","");
         return CommonResult.success(user);
     }
 
