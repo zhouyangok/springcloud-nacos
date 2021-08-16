@@ -13,7 +13,6 @@ import java.io.Serializable;
  * @Date 2020/6/9 下午2:48.
  */
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
 public class User implements Serializable{
 
@@ -22,4 +21,11 @@ public class User implements Serializable{
     private String username;
     private String password;
     private String role;
+
+    public User(Long id, String username, String password, String role) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
 }

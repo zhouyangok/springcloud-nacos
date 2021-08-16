@@ -19,12 +19,11 @@
         <!--        库存服务-->
         <module>stock-server</module>
         <!--        网关服务-->
-        <module>cloud-gateway</module>
+        <module>cloud-oauth2</module>
         <!--        订单服务-->
         <module>order-server</module>
         <!--                第三方查询服务-->
         <module>cloud-elasticsearch</module>
-        <module>auth-server</module>
         <!--        mq消息中间件服务-->
         <module>mq-server</module>
         <!--        邮件短信服务-->
@@ -32,6 +31,8 @@
         <module>cloud-oss</module>
         <module>other-learn</module>
         <module>cloud-mongodb</module>
+        <module>auth</module>
+<!--        <module>authentication-client</module>-->
     </modules>
     <packaging>pom</packaging>
 

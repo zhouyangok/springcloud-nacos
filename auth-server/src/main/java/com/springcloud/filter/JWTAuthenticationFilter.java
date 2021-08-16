@@ -1,3 +1,4 @@
+/*
 package com.springcloud.filter;
 
 import com.springcloud.constant.ConstantKey;
@@ -28,6 +29,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+*/
 /**
  * @ClassName JWTAuthenticationFilter
  * @Description: 自定义JWT认证过滤器
@@ -36,7 +38,8 @@ import java.util.List;
  * 如果校验通过，就认为这是一个取得授权的合法请求
  * @Author zhouyang
  * @Date 2020/9/16 下午10:26.
- */
+ *//*
+
 
 public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
 
@@ -153,3 +156,4 @@ public class JWTAuthenticationFilter extends BasicAuthenticationFilter {
 //        return null;
 //    }
 }
+*/

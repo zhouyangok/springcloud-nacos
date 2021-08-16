@@ -1,4 +1,4 @@
-package com.springcloud.usersecurity.service;
+package com.springcloud.usersecurity.service.impl;
 
 import cn.hutool.core.util.IdUtil;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;

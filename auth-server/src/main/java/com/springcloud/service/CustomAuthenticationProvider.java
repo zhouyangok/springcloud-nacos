@@ -1,3 +1,4 @@
+/*
 package com.springcloud.service;
 
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -13,12 +14,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import java.util.ArrayList;
 
+*/
 /**
  * @ClassName CustomAuthenticationProvider
  * @Description: 登录权限认证
  * @Author zhouyang
  * @Date 2020/9/16 下午10:41.
- */
+ *//*
+
 
 public class CustomAuthenticationProvider  implements AuthenticationProvider {
 
@@ -31,7 +34,8 @@ public class CustomAuthenticationProvider  implements AuthenticationProvider {
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-    /**
+    */
+/**
      *执行与以下合同相同的身份验证
      * {@link org.springframework.security.authentication.AuthenticationManager＃authenticate（Authentication）}
      *。
@@ -45,7 +49,8 @@ public class CustomAuthenticationProvider  implements AuthenticationProvider {
      * 将尝试<code> Authentication </ code>类。
      *
      * @throws AuthenticationException 如果身份验证失败。
-     */
+     *//*
+
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         // 获取认证的用户名 & 密码
@@ -70,13 +75,16 @@ public class CustomAuthenticationProvider  implements AuthenticationProvider {
         }
     }
 
-    /**
+    */
+/**
      * 是否可以提供输入类型的认证服务
      * @param authentication
      * @return
-     */
+     *//*
+
     @Override
     public boolean supports(Class<?> authentication) {
         return authentication.equals(UsernamePasswordAuthenticationToken.class);
     }
 }
+*/

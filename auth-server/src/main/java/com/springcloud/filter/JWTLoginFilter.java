@@ -1,3 +1,4 @@
+/*
 package com.springcloud.filter;
 
 import com.alibaba.fastjson.JSON;
@@ -20,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.*;
 
+*/
 /**
  * @ClassName JWTLoginFilter
  * @Description: 自定义JWT登录过滤器
@@ -29,7 +31,8 @@ import java.util.*;
  *  successfulAuthentication ：用户成功登录后，这个方法会被调用，我们在这个方法里生成token。
  * @Author zhouyang
  * @Date 2020/9/16 下午10:28.
- */
+ *//*
+
 
 public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
 
@@ -89,3 +92,4 @@ public class JWTLoginFilter extends UsernamePasswordAuthenticationFilter {
         }
     }
 }
+*/

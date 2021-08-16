@@ -1,13 +1,16 @@
+/*
 package com.springcloud.service;
 
 import org.springframework.security.core.GrantedAuthority;
 
+*/
 /**
  * @ClassName GrantedAuthorityImpl
  * @Description: TODO
  * @Author zhouyang
  * @Date 2020/9/16 下午10:38.
- */
+ *//*
+
 
 public class GrantedAuthorityImpl implements GrantedAuthority {
 
@@ -26,3 +29,4 @@ public class GrantedAuthorityImpl implements GrantedAuthority {
         return this.authority;
     }
 }
+*/

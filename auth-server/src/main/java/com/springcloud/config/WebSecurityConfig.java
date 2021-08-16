@@ -1,11 +1,10 @@
 package com.springcloud.config;
 
-import com.springcloud.filter.JWTAuthenticationFilter;
-import com.springcloud.filter.JWTLoginFilter;
 import com.springcloud.handler.Http401AuthenticationEntryPoint;
-import com.springcloud.service.CustomAuthenticationProvider;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -15,6 +14,7 @@ import org.springframework.security.config.annotation.web.configurers.LogoutConf
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import javax.annotation.Resource;
 
@@ -73,8 +73,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
 //                .exceptionHandling().accessDeniedHandler(customAccessDeniedHandler) // 自定义访问失败处理器
 //                .and()
-                .addFilter(new JWTLoginFilter(authenticationManager()))
-                .addFilter(new JWTAuthenticationFilter(authenticationManager()))
+//                .addFilter(new JWTLoginFilter(authenticationManager()))
+//                .addFilter(new JWTAuthenticationFilter(authenticationManager()))
                 .logout() // 默认注销行为为logout，可以通过下面的方式来修改
                 .logoutUrl("/logout")
                 .logoutSuccessUrl("/login")// 设置注销成功后跳转页面，默认是跳转到登录页面;
@@ -82,10 +82,21 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .permitAll();
     }
 
-    // 该方法是登录的时候会进入
+    @Bean
     @Override
-    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        // 使用自定义身份验证组件
-        auth.authenticationProvider(new CustomAuthenticationProvider(userDetailsService, bCryptPasswordEncoder));
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
+
+    // 该方法是登录的时候会进入
+//    @Override
+//    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        // 使用自定义身份验证组件
+//        auth.authenticationProvider(new CustomAuthenticationProvider(userDetailsService, bCryptPasswordEncoder));
+//    }
+
+//    @Bean
+//    public PasswordEncoder passwordEncoder() {
+//        return new BCryptPasswordEncoder();
+//    }
 }
