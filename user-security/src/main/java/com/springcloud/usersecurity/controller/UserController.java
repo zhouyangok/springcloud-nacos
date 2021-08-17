@@ -1,13 +1,16 @@
 package com.springcloud.usersecurity.controller;
 
 import cn.hutool.core.util.StrUtil;
-import com.springcloud.entity.User;
 import com.springcloud.result.CommonResult;
+import com.springcloud.usersecurity.entity.User;
+import com.springcloud.usersecurity.service.UserService;
 import com.springcloud.usersecurity.vo.UserVo;
 import io.swagger.annotations.Api;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 
 /**
  * @ClassName UserController
@@ -24,36 +27,55 @@ public class UserController {
 
     @Value("${server.port}")
     private String port;
+    @Resource
+    private UserService userService;
 
 
     @PostMapping("/createUser")
     public CommonResult createUser(@RequestBody User user) {
-        log.info("id:{},name:{}", user.getId(), user.getUsername());
-        return CommonResult.success();
+        log.info("id:{},name:{}", user.getUserId(), user.getUsername());
+        int result = userService.createUser(user);
+        if (result > 0) {
+            return CommonResult.success();
+        }
+        return CommonResult.fail();
     }
 
-    @GetMapping("/printThread/")
-    public CommonResult printThread(){
-      String name =    Thread.currentThread().getName();
-        System.out.println(name);
-        return CommonResult.success(name);
+    @PostMapping("/updateUser")
+    public CommonResult updateUser(@RequestBody User user) {
+        if (null != user.getUserId()) {
+            int result = userService.updateUser(user);
+            if (result > 0) {
+                return CommonResult.success();
+            }
+        }
+        return CommonResult.fail();
     }
 
     @GetMapping("/getById/{id}")
-    public CommonResult getUserById(@PathVariable Long id) {
+    public CommonResult getUserById(@PathVariable Integer id) {
         log.info("id:{}", id);
-        User user = new User(1L, "admin",port,"Admin");
+        User user = userService.getUserById(id);
         return CommonResult.success(user);
     }
 
-
-    @PostMapping("/login")
-    public CommonResult login(@RequestBody UserVo userVo){
-        if(StrUtil.equals(userVo.getUserName(),"admin")&&StrUtil.equals(userVo.getPassword(),"1")){
-            userVo.setUserId(1L);
-            userVo.setAvatar("/avatar/admin.jpg");
-            return CommonResult.success(userVo);
-        }
-        return CommonResult.fail("用户名或密码错误");
+    @GetMapping("/getUserList")
+    public CommonResult getUserList(@RequestParam int pageNum, @RequestParam int pageSize) {
+        return userService.getUserList(pageNum, pageSize);
     }
+
+    @DeleteMapping("/deleteUser/{id}")
+    public CommonResult deleteUser(@PathVariable Integer id) {
+        User user = userService.getUserById(id);
+        if (null != user) {
+            user.setStatus(-1);
+            int result = userService.updateUser(user);
+            if (result > 0) {
+                return CommonResult.success();
+            }
+        }
+        return CommonResult.fail();
+    }
+
+
 }

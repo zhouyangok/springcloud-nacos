@@ -41,6 +41,7 @@ public class UserServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        //todo 数据库查询用户
         List<UserDTO> findUserList = userList.stream().filter(item -> item.getUsername().equals(username)).collect(Collectors.toList());
         if (CollUtil.isEmpty(findUserList)) {
             throw new UsernameNotFoundException(MessageConstant.USERNAME_PASSWORD_ERROR);

@@ -17,11 +17,10 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
  * @Author zhouyang
  * @Date 2020/6/9 下午2:39.
  */
-@SpringBootApplication(exclude={DruidDataSourceAutoConfigure.class,DataSourceAutoConfiguration.class})
+@SpringBootApplication
 @EnableDiscoveryClient
-@EnableCircuitBreaker
-@EnableHystrix
 @EnableFeignClients
+@MapperScan("com.springcloud.usersecurity.mapper")
 public class UserSecurityApplication {
     public static void main(String[] args) {
         SpringApplication.run(UserSecurityApplication.class,args);
