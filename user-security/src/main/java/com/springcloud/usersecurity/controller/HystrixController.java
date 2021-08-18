@@ -1,7 +1,7 @@
 package com.springcloud.usersecurity.controller;
 
 import com.springcloud.result.CommonResult;
-import com.springcloud.usersecurity.service.HystrixService;
+import com.springcloud.usersecurity.service.impl.HystrixService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

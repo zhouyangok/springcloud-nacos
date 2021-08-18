@@ -36,6 +36,10 @@ public class    CommonResult<T> {
         return new CommonResult(400,"失败",false,data);
     }
 
+    public static<T> CommonResult fail(T data,T message){
+        return new CommonResult(400,"失败",false,data);
+    }
+
     public static <T> CommonResult success(T data){
         return new CommonResult(200,"成功",true,data);
     }

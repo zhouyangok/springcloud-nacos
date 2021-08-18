@@ -8,6 +8,7 @@ import com.springcloud.utils.DateUtils;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDateTime;
@@ -22,6 +23,7 @@ import java.util.Map;
  * @Date 2020/9/22 下午10:08.
  */
 @RestController
+@RequestMapping("/sendDirectMessage")
 public class SendMessageController {
 
     @Autowired
@@ -57,6 +59,7 @@ public class SendMessageController {
             //将消息携带绑定键值：TestDirectRouting 发送到交换机TestDirectExchange
             rabbitTemplate.convertAndSend("TestDirectExchange", "TestDirectRouting", map);
         }catch (Exception e){
+            e.printStackTrace();
             throw new MyExceptionHandler(20001,"消息发送失败");
         }
         return CommonResult.success();
