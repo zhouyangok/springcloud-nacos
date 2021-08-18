@@ -1,7 +1,11 @@
 package com.springcloud.usersecurity.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.springcloud.result.CommonResult;
 import com.springcloud.usersecurity.entity.Role;
+import com.springcloud.usersecurity.entity.User;
 import com.springcloud.usersecurity.mapper.RoleMapper;
 import com.springcloud.usersecurity.mapper.UserRoleMapper;
 import com.springcloud.usersecurity.service.RoleService;
@@ -32,11 +36,23 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public int updateRole(Role role) {
+        if(null!=role.getId()){
+           int result = roleMapper.updateById(role);
+           return result;
+        }
         return 0;
     }
 
     @Override
     public int deleteRole(int id) {
+        if(id>0){
+            Role role = this.getRoleById(id);
+            if(role!=null){
+                role.setStatus(-1);
+                int result = this.updateRole(role);
+                return result;
+            }
+        }
         return 0;
     }
 
@@ -49,7 +65,12 @@ public class RoleServiceImpl implements RoleService {
     }
 
     @Override
-    public List<Role> getRoleList(int pageNum, int pageSize) {
-        return null;
+    public CommonResult getRoleList(int pageNum, int pageSize) {
+        Page<Role> page = new Page<>(pageNum, pageSize);
+        QueryWrapper<Role> wrapper = new QueryWrapper();
+        QueryWrapper<Role> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("status", 0);
+        IPage orderIPage = roleMapper.selectPage(page, null);
+        return CommonResult.success(orderIPage);
     }
 }

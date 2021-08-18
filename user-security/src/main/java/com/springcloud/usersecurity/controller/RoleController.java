@@ -19,21 +19,49 @@ public class RoleController {
     private RoleService roleService;
 
     @PostMapping("/createRole")
-    public CommonResult createRole(@RequestBody Role role){
+    public CommonResult createRole(@RequestBody Role role) {
         int result = roleService.createRole(role);
-        if(result>0){
+        if (result > 0) {
+            return CommonResult.success();
+        }
+        return CommonResult.fail();
+    }
+
+    @PostMapping("/updateRole")
+    public CommonResult updateRole(@RequestBody Role role) {
+        int result = roleService.updateRole(role);
+        if (result > 0) {
             return CommonResult.success();
         }
         return CommonResult.fail();
     }
 
     @GetMapping("/getRoleById/{id}")
-    public CommonResult getRoleById(@PathVariable Integer id){
-        if(id!=null && id>0){
+    public CommonResult getRoleById(@PathVariable Integer id) {
+        if (id != null && id > 0) {
             Role role = roleService.getRoleById(id);
-            if(role!=null){
+            if (role != null) {
                 return CommonResult.success(role);
             }
+        }
+        return CommonResult.fail();
+    }
+
+    @DeleteMapping("deleteRole/{id}")
+    public CommonResult deleteRole(@PathVariable int id) {
+        if (id > 0) {
+            int result = roleService.deleteRole(id);
+            if (result > 0) {
+                return CommonResult.success();
+            }
+        }
+        return CommonResult.fail();
+    }
+
+    @GetMapping("/getRoleList")
+    public CommonResult getRoleList(@RequestParam int pageNum, @RequestParam int pageSize) {
+        if (pageNum > 0 && pageSize > 0) {
+            return roleService.getRoleList(pageNum, pageSize);
         }
         return CommonResult.fail();
     }

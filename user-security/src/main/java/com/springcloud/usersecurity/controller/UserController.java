@@ -32,7 +32,7 @@ public class UserController {
 
 
     @PostMapping("/createUser")
-    public CommonResult createUser(@RequestBody User user) {
+    public CommonResult createUser(@RequestBody UserVo user) {
         log.info("id:{},name:{}", user.getUserId(), user.getUsername());
         int result = userService.createUser(user);
         if (result > 0) {

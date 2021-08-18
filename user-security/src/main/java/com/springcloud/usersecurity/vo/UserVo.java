@@ -13,8 +13,9 @@ import java.io.Serializable;
 
 @Data
 public class UserVo implements Serializable {
-    private Long userId;
-    private String userName;
-    private String avatar;
+    private Integer userId;
+    private String username;
     private String password;
+    private Integer roleId;
+    private Integer createUserId;
 }

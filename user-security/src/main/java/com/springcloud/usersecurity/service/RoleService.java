@@ -1,5 +1,6 @@
 package com.springcloud.usersecurity.service;
 
+import com.springcloud.result.CommonResult;
 import com.springcloud.usersecurity.entity.Role;
 import org.springframework.stereotype.Service;
 
@@ -21,5 +22,5 @@ public interface RoleService {
 
     Role getRoleById(Integer id);
 
-    List<Role> getRoleList(int pageNum,int pageSize);
+    CommonResult getRoleList(int pageNum, int pageSize);
 }

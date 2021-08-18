@@ -2,6 +2,7 @@ package com.springcloud.usersecurity.service;
 
 import com.springcloud.result.CommonResult;
 import com.springcloud.usersecurity.entity.User;
+import com.springcloud.usersecurity.vo.UserVo;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,7 +15,7 @@ import java.util.List;
  */
 @Service
 public interface UserService {
-    int createUser(User user);
+    int createUser(UserVo user);
 
     int updateUser(User user);
 
