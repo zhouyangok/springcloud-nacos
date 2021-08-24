@@ -22,5 +22,7 @@ public interface RoleService {
 
     Role getRoleById(Integer id);
 
+    List<Role> getRoleListByUserId(Integer userId);
+
     CommonResult getRoleList(int pageNum, int pageSize);
 }

@@ -1,5 +1,6 @@
 package com.macro.cloud.domain;
 
+import com.macro.cloud.entity.User;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -40,11 +41,11 @@ public class SecurityUser implements UserDetails {
 
     }
 
-    public SecurityUser(UserDTO userDTO) {
-        this.setId(userDTO.getId());
+    public SecurityUser(User userDTO) {
+        this.setId(userDTO.getUserId());
         this.setUsername(userDTO.getUsername());
         this.setPassword(userDTO.getPassword());
-        this.setEnabled(userDTO.getStatus() == 1);
+        this.setEnabled(userDTO.getStatus() == 0);
         if (userDTO.getRoles() != null) {
             authorities = new ArrayList<>();
             userDTO.getRoles().forEach(item -> authorities.add(new SimpleGrantedAuthority(item)));

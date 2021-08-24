@@ -6,6 +6,8 @@ import com.springcloud.usersecurity.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * @ClassName RoleController
  * @Description: TODO
@@ -43,6 +45,15 @@ public class RoleController {
             if (role != null) {
                 return CommonResult.success(role);
             }
+        }
+        return CommonResult.fail();
+    }
+
+    @GetMapping("/getRoleByUserId/{userId}")
+    public CommonResult getRolesByUserId(@PathVariable int userId){
+        if(userId > 0){
+            List<Role> results = roleService.getRoleListByUserId(userId);
+            return CommonResult.success(results);
         }
         return CommonResult.fail();
     }

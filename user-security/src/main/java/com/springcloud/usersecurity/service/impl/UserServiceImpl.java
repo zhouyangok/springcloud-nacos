@@ -14,6 +14,8 @@ import com.springcloud.usersecurity.mapper.UserMapper;
 import com.springcloud.usersecurity.mapper.UserRoleMapper;
 import com.springcloud.usersecurity.service.UserService;
 import com.springcloud.usersecurity.vo.UserVo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -32,23 +34,25 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
     @Resource
     private UserRoleMapper userRoleMapper;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
     @Override
     public int createUser(UserVo user) {
         User user1 = new User();
         BeanUtil.copyProperties(user,user1);
+        String password = passwordEncoder.encode(user.getPassword());
+        user1.setPassword(password);
         //插入用户到数据表
         int result = userMapper.insert(user1);
         //插入角色到数据表
-        UserRole userRole = new UserRole();
-        userRole.setRoleId(user.getRoleId());
-        userRole.setUserId(user1.getUserId());
-        userRole.setCreateUserId(user.getCreateUserId());
-        userRoleMapper.insert(userRole);
+        userRoleMapper.saveBatchByUserId(user.getRoleIds(),user1.getUserId(),user.getCreateUserId());
         return result;
     }
 
     @Override
     public int updateUser(User user) {
+        String password = passwordEncoder.encode(user.getPassword());
+        user.setPassword(password);
         int result =  userMapper.updateById(user);
         return result;
     }

@@ -19,11 +19,31 @@ public class MenuController {
     @Resource
     private MenuService menuService;
 
-    @PostMapping("/create")
+    @PostMapping("/createMenu")
     public CommonResult createMenu(@RequestBody Menu menu){
         int result = menuService.createMenu(menu);
         if(result>0){
             return CommonResult.success();
+        }
+        return CommonResult.fail();
+    }
+
+    @PostMapping("/updateMenu")
+    public CommonResult updateMenu(@RequestBody Menu menu){
+        int result = menuService.updateMenu(menu);
+        if(result>0){
+            return CommonResult.success();
+        }
+        return CommonResult.fail();
+    }
+
+    @DeleteMapping("/deleteMenu/{id}")
+    public  CommonResult deleteMenu(@PathVariable int id){
+        if(id>0){
+            int result = menuService.deleteMenu(id);
+            if(result>0){
+                return CommonResult.success();
+            }
         }
         return CommonResult.fail();
     }

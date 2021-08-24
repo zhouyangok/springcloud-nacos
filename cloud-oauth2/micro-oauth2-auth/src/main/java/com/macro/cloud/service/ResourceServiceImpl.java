@@ -22,11 +22,11 @@ public class ResourceServiceImpl {
     @Autowired
     private RedisTemplate<String,Object> redisTemplate;
 
-    @PostConstruct
-    public void initData() {
-        resourceRolesMap = new TreeMap<>();
-        resourceRolesMap.put("/api/hello", CollUtil.toList("ADMIN"));
-        resourceRolesMap.put("/api/user/currentUser", CollUtil.toList("ADMIN", "TEST"));
-        redisTemplate.opsForHash().putAll(RedisConstant.RESOURCE_ROLES_MAP, resourceRolesMap);
-    }
+//    @PostConstruct
+//    public void initData() {
+//        resourceRolesMap = new TreeMap<>();
+//        resourceRolesMap.put("/api/hello", CollUtil.toList("ADMIN"));
+//        resourceRolesMap.put("/api/user/currentUser", CollUtil.toList("ADMIN", "TEST"));
+//        redisTemplate.opsForHash().putAll(RedisConstant.RESOURCE_ROLES_MAP, resourceRolesMap);
+//    }
 }

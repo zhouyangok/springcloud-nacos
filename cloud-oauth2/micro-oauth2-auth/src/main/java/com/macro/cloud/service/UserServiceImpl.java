@@ -1,9 +1,12 @@
 package com.macro.cloud.service;
 
 import cn.hutool.core.collection.CollUtil;
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.macro.cloud.domain.SecurityUser;
 import com.macro.cloud.domain.UserDTO;
 import com.macro.cloud.constant.MessageConstant;
+import com.macro.cloud.entity.User;
+import com.macro.cloud.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AccountExpiredException;
 import org.springframework.security.authentication.CredentialsExpiredException;
@@ -16,6 +19,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
+import java.sql.Wrapper;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -27,26 +32,28 @@ import java.util.stream.Collectors;
 @Service
 public class UserServiceImpl implements UserDetailsService {
 
-    private List<UserDTO> userList;
+//    private List<UserDTO> userList;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Resource
+    private UserMapper userMapper;
 
-    @PostConstruct
-    public void initData() {
-        String password = passwordEncoder.encode("123456");
-        userList = new ArrayList<>();
-        userList.add(new UserDTO(1L,"macro", password,1, CollUtil.toList("ADMIN")));
-        userList.add(new UserDTO(2L,"andy", password,1, CollUtil.toList("TEST")));
-    }
+//    @PostConstruct
+//    public void initData() {
+//        String password = passwordEncoder.encode("123456");
+//        userList = new ArrayList<>();
+//        userList.add(new UserDTO(1L,"macro", password,1, CollUtil.toList("ADMIN")));
+//        userList.add(new UserDTO(2L,"andy", password,1, CollUtil.toList("TEST")));
+//    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         //todo 数据库查询用户
-        List<UserDTO> findUserList = userList.stream().filter(item -> item.getUsername().equals(username)).collect(Collectors.toList());
-        if (CollUtil.isEmpty(findUserList)) {
+       List<User> userList = userMapper.getRoles(username);
+        if (CollUtil.isEmpty(userList)) {
             throw new UsernameNotFoundException(MessageConstant.USERNAME_PASSWORD_ERROR);
         }
-        SecurityUser securityUser = new SecurityUser(findUserList.get(0));
+        SecurityUser securityUser = new SecurityUser(userList.get(0));
         if (!securityUser.isEnabled()) {
             throw new DisabledException(MessageConstant.ACCOUNT_DISABLED);
         } else if (!securityUser.isAccountNonLocked()) {

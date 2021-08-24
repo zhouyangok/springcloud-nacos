@@ -1,5 +1,6 @@
 package com.springcloud.usersecurity.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -12,6 +13,7 @@ import com.springcloud.usersecurity.service.RoleService;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,18 +38,18 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public int updateRole(Role role) {
-        if(null!=role.getId()){
-           int result = roleMapper.updateById(role);
-           return result;
+        if (null != role.getId()) {
+            int result = roleMapper.updateById(role);
+            return result;
         }
         return 0;
     }
 
     @Override
     public int deleteRole(int id) {
-        if(id>0){
+        if (id > 0) {
             Role role = this.getRoleById(id);
-            if(role!=null){
+            if (role != null) {
                 role.setStatus(-1);
                 int result = this.updateRole(role);
                 return result;
@@ -59,9 +61,21 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public Role getRoleById(Integer id) {
         QueryWrapper<Role> wrapper = new QueryWrapper();
-        wrapper.eq("id",id);
-        wrapper.eq("status",0);
+        wrapper.eq("id", id);
+        wrapper.eq("status", 0);
         return roleMapper.selectOne(wrapper);
+    }
+
+    @Override
+    public List<Role> getRoleListByUserId(Integer userId) {
+        List<Role> roles = new ArrayList<>();
+        List<Integer> roleIds = userRoleMapper.getRoleIdsByUserId(userId);
+        if (!roleIds.isEmpty()) {
+            QueryWrapper<Role> wrapper = new QueryWrapper<>();
+            wrapper.eq("status", 0).in("id", roleIds);
+            roles = roleMapper.selectList(wrapper);
+        }
+        return roles;
     }
 
     @Override
