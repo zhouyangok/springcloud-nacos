@@ -1,5 +1,5 @@
 server:
-  port: 9201
+  port: 9211
 spring:
   profiles:
     active: dev
@@ -25,9 +25,9 @@ spring:
             - StripPrefix=1
         - id: payment_routh2 #payment_route    #路由的ID，没有固定规则但要求唯一，建议配合服务名
             #uri: http://localhost:8001          #匹配后提供服务的路由地址
-          uri: lb://order-server #匹配后提供服务的路由地址
+          uri: lb://user-security #匹配后提供服务的路由地址
           predicates:
-            - Path=/order/**         # 断言，路径相匹配的进行路由
+            - Path=/user/**         # 断言，路径相匹配的进行路由
               #- After=2020-02-21T15:51:37.485+08:00[Asia/Shanghai]
               #- Cookie=username,zzyy
               #- Header=X-Request-Id, \d+  # 请求头要有X-Request-Id属性并且值为整数的正则表达式
