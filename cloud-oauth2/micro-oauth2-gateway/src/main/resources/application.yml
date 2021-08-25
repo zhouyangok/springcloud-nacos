@@ -15,6 +15,9 @@ spring:
           uri: lb://micro-oauth2-api
           predicates:
             - Path=/api/**
+          #当请求路径匹配到/hello/world/HiController/**会将包含hello和后边的字符串接去掉转发，
+          #StripPrefix=2就代表截取路径的个数，这样配置后当请求/hello/world/HiController/aaa后端匹配到的请求路径，
+          #就会变成http://localhost:8762/HiController/aaa
           filters:
             - StripPrefix=1
         - id: oauth2-auth-route
@@ -32,7 +35,7 @@ spring:
               #- Cookie=username,zzyy
               #- Header=X-Request-Id, \d+  # 请求头要有X-Request-Id属性并且值为整数的正则表达式
 #          filters:
-#            - StripPrefix=1
+#            - StripPrefix=2
 #            - name: Hystrix
 #              args:
 #                name: fallbackCmdA
@@ -56,3 +59,4 @@ secure:
     urls: #配置白名单路径
       - "/actuator/**"
       - "/auth/oauth/token"
+      - "/auth/code/getAuthCode"
