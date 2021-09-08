@@ -47,8 +47,8 @@ public class OrderController {
 
     @ApiOperation("根据id获取订单详情")
     @ApiImplicitParam(name = "id", value = "订单id", required = true)
-    @GetMapping("/getOrder/{id}")
-    public CommonResult getOrder(@PathVariable Integer id) {
+    @GetMapping("/getOrder")
+    public CommonResult getOrder(@RequestParam Integer id) {
         return orderService.getOrderById(id);
     }
 

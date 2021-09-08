@@ -26,6 +26,12 @@ spring:
             - Path=/auth/**
           filters:
             - StripPrefix=1
+        - id: order-route
+          uri: lb://order-server
+          predicates:
+            - Path=/order/**
+#          filters:
+#            - StripPrefix=1
         - id: payment_routh2 #payment_route    #路由的ID，没有固定规则但要求唯一，建议配合服务名
             #uri: http://localhost:8001          #匹配后提供服务的路由地址
           uri: lb://user-security #匹配后提供服务的路由地址

@@ -9,6 +9,7 @@ import com.order.service.ScoreServiceFeign;
 import com.order.service.StockServiceFeign;
 import com.springcloud.entity.Order;
 import com.springcloud.entity.Score;
+import com.springcloud.exception.MyExceptionHandler;
 import com.springcloud.result.CommonResult;
 import org.springframework.stereotype.Service;
 
@@ -49,11 +50,12 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public CommonResult getOrderById(Integer id) {
-        //        try{
-        int i = 1 / 0;
-//        }catch (Exception e){
-//            throw new MyExceptionHandler(1,"自定义异常");
-//        }
+                try{
+//        int i = 1 / 0;
+        }catch (Exception e){
+                    e.printStackTrace();
+            throw new MyExceptionHandler(1,"自定义异常");
+        }
         Order order = orderMapper.selectById(id);
         return CommonResult.success(order);
     }
