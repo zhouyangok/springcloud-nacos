@@ -44,6 +44,7 @@ public class ScoreServiceImpl implements ScoreService {
 
     @Override
     public CommonResult getScore(Integer userId) {
+        log.debug("userId={}",userId);
         QueryWrapper<Score> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("user_id", userId);
         Score data = scoreMapper.selectOne(queryWrapper);

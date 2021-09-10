@@ -31,7 +31,7 @@
         <module>cloud-oss</module>
         <module>other-learn</module>
         <module>cloud-mongodb</module>
-        <module>auth</module>
+<!--        <module>auth</module>-->
 <!--        <module>authentication-client</module>-->
     </modules>
     <packaging>pom</packaging>
@@ -91,11 +91,11 @@
                 <artifactId>mybatis-spring-boot-starter</artifactId>
                 <version>${mybatis.spring.boot.version}</version>
             </dependency>
-            <dependency>
-                <groupId>log4j</groupId>
-                <artifactId>log4j</artifactId>
-                <version>${log4j.version}</version>
-            </dependency>
+<!--            <dependency>-->
+<!--                <groupId>log4j</groupId>-->
+<!--                <artifactId>log4j</artifactId>-->
+<!--                <version>${log4j.version}</version>-->
+<!--            </dependency>-->
             <dependency>
                 <groupId>junit</groupId>
                 <artifactId>junit</artifactId>
