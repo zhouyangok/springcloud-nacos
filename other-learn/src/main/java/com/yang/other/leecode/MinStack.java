@@ -4,7 +4,7 @@ import java.util.LinkedList;
 
 /**
  * @ClassName MinStack
- * @Description: TODO
+ * @Description: 包含 min 函数的栈
  * @Author zhouyang
  * @Date 2021/9/10 上午9:16.
  */
